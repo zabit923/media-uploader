@@ -66,6 +66,8 @@ class DbSettings(BaseModel):
 
 static_dir = BASE_DIR / "static"
 media_dir = static_dir / "media"
+static_dir.mkdir(parents=True, exist_ok=True)
+media_dir.mkdir(parents=True, exist_ok=True)
 
 
 class Settings(BaseSettings):
