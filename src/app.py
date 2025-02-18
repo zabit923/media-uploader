@@ -8,7 +8,7 @@ from starlette.staticfiles import StaticFiles
 
 from admin import AdminAuth, AudioAdmin, UserAdmin
 from api.routers import router as api_router
-from config import settings, static_dir
+from config import SECRET_KEY, settings, static_dir
 from core.database.db import engine
 
 logging.basicConfig(
@@ -28,7 +28,7 @@ app.include_router(
 
 app.mount("/static", StaticFiles(directory=static_dir), name="static")
 
-admin_auth = AdminAuth(secret_key=settings.secret.secret_key)
+admin_auth = AdminAuth(secret_key=SECRET_KEY)
 admin = Admin(app=app, engine=engine, authentication_backend=admin_auth)
 admin.add_view(UserAdmin)
 admin.add_view(AudioAdmin)

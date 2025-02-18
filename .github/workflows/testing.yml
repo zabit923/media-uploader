@@ -15,8 +15,6 @@ jobs:
         DB_HOST: postgres
         DB_PORT: 5432
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        RESET_PASSWORD_TOKEN_SECRET: ${{ secrets.RESET_PASSWORD_TOKEN_SECRET }}
-        VERIFICATION_TOKEN_SECRET: ${{ secrets.VERIFICATION_TOKEN_SECRET }}
         DEBUG: ${{ secrets.DEBUG }}
 
     services:

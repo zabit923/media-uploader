@@ -25,17 +25,7 @@ DB_HOST = env.str("DB_HOST")
 DB_PORT = env.int("DB_PORT")
 DB_DATABASE = env.str("POSTGRES_DB")
 
-JWT_ALGORITHM = "HS256"
-
 SECRET_KEY = env.str("SECRET_KEY")
-RESET_PASSWORD_TOKEN_SECRET = env.str("RESET_PASSWORD_TOKEN_SECRET")
-VERIFICATION_TOKEN_SECRET = env.str("VERIFICATION_TOKEN_SECRET")
-
-
-class SecretKey(BaseModel):
-    secret_key: str = SECRET_KEY
-    reset_password_token_secret: str = RESET_PASSWORD_TOKEN_SECRET
-    verification_token_secret: str = VERIFICATION_TOKEN_SECRET
 
 
 class RunConfig(BaseModel):
@@ -81,7 +71,6 @@ media_dir = static_dir / "media"
 class Settings(BaseSettings):
     run: RunConfig = RunConfig()
     db: DbSettings = DbSettings()
-    secret: SecretKey = SecretKey()
     logging: LoggingConfig = LoggingConfig()
 
 
