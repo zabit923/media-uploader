@@ -7,6 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app import app
 from core.database import get_async_session, get_test_async_session, test_engine
 from core.database.models import Base, User
+from core.factories import UserFactory
 
 
 @pytest_asyncio.fixture(scope="session", autouse=True)
@@ -21,10 +22,13 @@ async def init_db():
 @pytest_asyncio.fixture(scope="function")
 async def test_session(init_db) -> AsyncSession:
     async for session in get_test_async_session():
-        await session.execute(delete(User))
-        await session.commit()
-        yield session
-        await session.close()
+        try:
+            UserFactory._meta.sqlalchemy_session = session
+            await session.execute(delete(User))
+            await session.commit()
+            yield session
+        finally:
+            await session.close()
 
 
 @pytest_asyncio.fixture

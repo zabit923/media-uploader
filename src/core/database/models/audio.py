@@ -6,7 +6,7 @@ from sqlalchemy import TIMESTAMP, VARCHAR, ForeignKey, func
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from core.database.models import Base, TableNameMixin
+from .base import Base, TableNameMixin
 
 if TYPE_CHECKING:
     from .users import User
